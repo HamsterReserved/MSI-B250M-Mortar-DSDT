@@ -5251,7 +5251,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                         0xFF, 
                         0xFF
                     })
-                    Mutex (MUT0, 0x00)
+                    Mutex(MUT0, 0)
                     Method (ENFG, 1, NotSerialized)
                     {
                         Acquire (MUT0, 0x0FFF)
@@ -19530,7 +19530,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
     }
 
     Name (ECUP, One)
-    Mutex (EHLD, 0x00)
+    Mutex(EHLD, 0)
     Method (TBTD, 1, Serialized)
     {
         Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
@@ -19856,8 +19856,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
         }
     }
 
-    Mutex (MUTX, 0x00)
-    Mutex (OSUM, 0x00)
+    Mutex(MUTX, 0)
+    Mutex(OSUM, 0)
     Event (WFEV)
     OperationRegion (PRT0, SystemIO, 0x80, 0x04)
     Field (PRT0, DWordAcc, Lock, Preserve)
@@ -40544,7 +40544,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
     {
         Device (WMIO)
         {
-            Mutex (WMIX, 0x01)
+            Mutex(WMIX, 0)
             Name (_HID, "PNP0C14")  // _HID: Hardware ID
             Name (_UID, "MFBI")  // _UID: Unique ID
             Name (BUF4, Buffer (0x04)
