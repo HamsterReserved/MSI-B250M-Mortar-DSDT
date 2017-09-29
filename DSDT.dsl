@@ -95,9 +95,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
     External (_SB_.PCI0.IGPU.IUEH, MethodObj)    // 1 Arguments (from opcode)
     External (_SB_.PCI0.IGPU.STAT, UnknownObj)    // (from opcode)
     External (_SB_.PCI0.IGPU.TCHE, UnknownObj)    // (from opcode)
-    External (_SB_.PCI0.HDAS.PPMS, MethodObj)    // 1 Arguments (from opcode)
-    External (_SB_.PCI0.HDAS.PS0X, MethodObj)    // 0 Arguments (from opcode)
-    External (_SB_.PCI0.HDAS.PS3X, MethodObj)    // 0 Arguments (from opcode)
+    External (_SB_.PCI0.HDEF.PPMS, MethodObj)    // 1 Arguments (from opcode)
+    External (_SB_.PCI0.HDEF.PS0X, MethodObj)    // 0 Arguments (from opcode)
+    External (_SB_.PCI0.HDEF.PS3X, MethodObj)    // 0 Arguments (from opcode)
     External (_SB_.PCI0.LPCB.H_EC.CHRG, DeviceObj)    // (from opcode)
     External (_SB_.PCI0.LPCB.H_EC.XDAT, MethodObj)    // 0 Arguments (from opcode)
     External (_SB_.PCI0.PAUD.PUAM, MethodObj)    // 0 Arguments (from opcode)
@@ -13887,7 +13887,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
         Method (_L6D, 0, Serialized)  // _Lxx: Level-Triggered GPE
         {
             \_SB.PCI0.XHC.GPEH ()
-            \_SB.PCI0.HDAS.GPEH ()
+            \_SB.PCI0.HDEF.GPEH ()
             \_SB.PCI0.GLAN.GPEH ()
             \_SB.PCI0.XDCI.GPEH ()
         }
@@ -15415,7 +15415,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
 
     Scope (_SB.PCI0)
     {
-        Device (HDAS)
+        Device (HDEF)
         {
             Name (_ADR, 0x001F0003)  // _ADR: Address
             OperationRegion (HDAR, PCI_Config, Zero, 0x0100)
@@ -15453,9 +15453,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
 
                 If (LAnd (PMEE, PMES))
                 {
-                    ADBG ("HDAS GPEH")
+                    ADBG ("HDEF GPEH")
                     Store (One, PMES)
-                    Notify (HDAS, 0x02)
+                    Notify (HDEF, 0x02)
                 }
             }
 
@@ -15466,7 +15466,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                     VMMH (Zero, One)
                 }
 
-                If (CondRefOf (\_SB.PCI0.HDAS.PS0X))
+                If (CondRefOf (\_SB.PCI0.HDEF.PS0X))
                 {
                     PS0X ()
                 }
@@ -15479,7 +15479,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                     VMMH (Zero, Zero)
                 }
 
-                If (CondRefOf (\_SB.PCI0.HDAS.PS3X))
+                If (CondRefOf (\_SB.PCI0.HDEF.PS3X))
                 {
                     PS3X ()
                 }
@@ -15504,20 +15504,20 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
             })
             Method (_INI, 0, NotSerialized)  // _INI: Initialize
             {
-                ADBG ("HDAS _INI")
+                ADBG ("HDEF _INI")
                 If (LGreaterEqual (OSYS, 0x07D9))
                 {
-                    CreateQWordField (NBUF, \_SB.PCI0.HDAS._Y38._MIN, NBAS)  // _MIN: Minimum Base Address
-                    CreateQWordField (NBUF, \_SB.PCI0.HDAS._Y38._MAX, NMAS)  // _MAX: Maximum Base Address
-                    CreateQWordField (NBUF, \_SB.PCI0.HDAS._Y38._LEN, NLEN)  // _LEN: Length
+                    CreateQWordField (NBUF, \_SB.PCI0.HDEF._Y38._MIN, NBAS)  // _MIN: Minimum Base Address
+                    CreateQWordField (NBUF, \_SB.PCI0.HDEF._Y38._MAX, NMAS)  // _MAX: Maximum Base Address
+                    CreateQWordField (NBUF, \_SB.PCI0.HDEF._Y38._LEN, NLEN)  // _LEN: Length
                     Store (NHLA, NBAS)
                     Add (NHLA, Subtract (NHLL, One), NMAS)
                     Store (NHLL, NLEN)
                 }
                 Else
                 {
-                    CreateDWordField (XBF0, \_SB.PCI0.HDAS._Y39._BAS, XBAS)  // _BAS: Base Address
-                    CreateDWordField (XBF0, \_SB.PCI0.HDAS._Y39._LEN, XLEN)  // _LEN: Length
+                    CreateDWordField (XBF0, \_SB.PCI0.HDEF._Y39._BAS, XBAS)  // _BAS: Base Address
+                    CreateDWordField (XBF0, \_SB.PCI0.HDEF._Y39._LEN, XLEN)  // _LEN: Length
                     Store (NHLA, XBAS)
                     Store (NHLL, XLEN)
                 }
@@ -31751,7 +31751,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
         }
     }
 
-    Scope (_SB.PCI0.HDAS)
+    Scope (_SB.PCI0.HDEF)
     {
         Method (_DEP, 0, NotSerialized)  // _DEP: Dependencies
         {
@@ -33339,7 +33339,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
 
                 Package (0x03)
                 {
-                    "\\_SB.PCI0.HDAS", 
+                    "\\_SB.PCI0.HDEF", 
                     One, 
                     Package (0x02)
                     {
