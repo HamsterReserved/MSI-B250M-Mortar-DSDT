@@ -12332,13 +12332,16 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
     })
     Method (_PTS, 1, NotSerialized)  // _PTS: Prepare To Sleep
     {
-        If (Arg0)
+        If (LNotEqual(Arg0,5)) {
+    If (Arg0)
         {
             \_SB.TPM.TPTS (Arg0)
             \_SB.PCI0.LPCB.SPTS (Arg0)
             \_SB.PCI0.NPTS (Arg0)
             RPTS (Arg0)
         }
+}
+
     }
 
     Method (_WAK, 1, NotSerialized)  // _WAK: Wake
