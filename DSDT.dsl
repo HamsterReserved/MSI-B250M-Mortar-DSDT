@@ -130,7 +130,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
     External (_TZ_.TZ01, DeviceObj)    // (from opcode)
     External (AL6F, MethodObj)    // Warning: Unknown method, guessing 0 arguments
     External (ALSE, UnknownObj)    // (from opcode)
-    External (BNUM, UnknownObj)    // (from opcode)
     External (BRTL, UnknownObj)    // (from opcode)
     External (CRBI, UnknownObj)    // (from opcode)
     External (DIDX, UnknownObj)    // (from opcode)
