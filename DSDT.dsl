@@ -19419,7 +19419,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
 
     Scope (_SB.PCI0)
     {
-        Device (HECI)
+        Device (IMEI)
         {
             Name (_ADR, 0x00160000)  // _ADR: Address
             Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
