@@ -39333,13 +39333,16 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
         {
             Name (_HID, EisaId ("PNP0103"))  // _HID: Hardware ID
             Name (_UID, Zero)  // _UID: Unique ID
-            Name (BUF0, ResourceTemplate ()
-            {
+            Name (BUF0, ResourceTemplate()
+{
+    IRQNoFlags() { 0, 8, 11, 15 }
+
                 Memory32Fixed (ReadWrite,
                     0xFED00000,         // Address Base
                     0x00000400,         // Address Length
                     _Y56)
             })
+
             Method (_STA, 0, NotSerialized)  // _STA: Status
             {
                 Store (HPAM, HPTE)
@@ -39470,8 +39473,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                     0x01,               // Alignment
                     0x02,               // Length
                     )
-                IRQNoFlags ()
-                    {2}
+                
             })
         }
 
@@ -39644,8 +39646,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                     0x01,               // Alignment
                     0x02,               // Length
                     )
-                IRQNoFlags ()
-                    {8}
+                
             })
         }
 
@@ -39666,8 +39667,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                     0x10,               // Alignment
                     0x04,               // Length
                     )
-                IRQNoFlags ()
-                    {0}
+                
             })
         }
 
