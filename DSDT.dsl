@@ -15514,67 +15514,19 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                     VMMH (Zero, One)
                 }
             }
-
-            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
+            Method (_DSM, 4, NotSerialized)
             {
-                Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
-                ADBG ("HDAS _DSM")
-                If (PCIC (Arg0))
+                If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                Return (Package()
                 {
-                    Return (PCID (Arg0, Arg1, Arg2, Arg3))
-                }
-
-                If (LEqual (Arg0, ToUUID ("a69f886e-6ceb-4594-a41f-7b5dce24c553")))
-                {
-                    While (One)
-                    {
-                        Store (ToInteger (Arg2), _T_0)
-                        If (LEqual (_T_0, Zero))
-                        {
-                            Return (Buffer (One)
-                            {
-                                 0x0F                                           
-                            })
-                        }
-                        ElseIf (LEqual (_T_0, One))
-                        {
-                            ADBG ("_DSM Fun 1 NHLT")
-                            Return (NBUF)
-                        }
-                        ElseIf (LEqual (_T_0, 0x02))
-                        {
-                            ADBG ("_DSM Fun 2 FMSK")
-                            Return (ADFM)
-                        }
-                        ElseIf (LEqual (_T_0, 0x03))
-                        {
-                            ADBG ("_DSM Fun 3 PPMS")
-                            If (CondRefOf (\_SB.PCI0.HDAS.PPMS))
-                            {
-                                Return (PPMS (Arg3))
-                            }
-
-                            Return (Zero)
-                        }
-                        Else
-                        {
-                            ADBG ("_DSM Fun NOK")
-                            Return (Buffer (One)
-                            {
-                                 0x00                                           
-                            })
-                        }
-
-                        Break
-                    }
-                }
-
-                ADBG ("_DSM UUID NOK")
-                Return (Buffer (One)
-                {
-                     0x00                                           
+                    "layout-id", Buffer() { 6, 0x00, 0x00, 0x00 },
+                    "hda-gfx", Buffer() { "onboard-1" },
+                    "PinConfigurations", Buffer() { },
+                    //"MaximumBootBeepVolume", 77,
                 })
             }
+
+            
         }
 
         Device (SAT0)
