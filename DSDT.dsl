@@ -4931,16 +4931,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                 Device (IGPU)
                 {
                     Name (_ADR, 0x00020000)  // _ADR: Address
-                    Method (_DSM, 4, NotSerialized)
-                    {
-                        If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
-                        Return (Package()
-                        {
-                            "AAPL,ig-platform-id", Buffer() { 0x00, 0x00, 0x1b, 0x59 },
-                            "hda-gfx", Buffer() { "onboard-1" },
-                        })
-                    }
-                    
                 }
 
                 Device (B0D4)
