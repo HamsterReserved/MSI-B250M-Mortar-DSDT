@@ -15522,7 +15522,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                 If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
                 Return (Package()
                 {
-                    "layout-id", Buffer() { 6, 0x00, 0x00, 0x00 },
+                    "layout-id", Buffer() { 1, 0x00, 0x00, 0x00 },
                     "hda-gfx", Buffer() { "onboard-1" },
                     "PinConfigurations", Buffer() { },
                     //"MaximumBootBeepVolume", 77,
